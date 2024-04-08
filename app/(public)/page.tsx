@@ -43,6 +43,7 @@ export default function LoginAccount() {
     try {
       setisloading(true);
       const user = await axiosClient.post('/auth/admin/login', data);
+      console.log(user)
       toast.success('successfully logged in');
       if (remember === 0) {
         setCookie('user', user.data.token, 0.1);
@@ -54,7 +55,8 @@ export default function LoginAccount() {
       router.push('/home');
       setisloading(true);
     } catch (error: any) {
-      toast.error(error?.response.data.message);
+      const erro = error?.response.data.message || 'error'
+      toast.error(erro);
       setisloading(false);
     }
   };

@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Avatar from 'react-avatar';
+import sockerclient from '@/helpers/socket';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -27,7 +28,7 @@ const Navbar = () => {
     {
       lastLat: 0,
       lastLong: 0,
-      time: "",
+      time: "N/A",
       __v: 0,
       altitude: 0,
       email: "",
@@ -36,18 +37,20 @@ const Navbar = () => {
     },
   ])
   const getsos = async () => {
-    const data = await axiosClient.get('/sos', {
-      headers: {
-      Authorization: `Bearer ${Cookies.get('user')}`
+    sockerclient.connect()
+    sockerclient.subscribeTo('SOS-admin', (data: any) => {
+      console.log(data)
+      if (
+        Array.isArray(data) &&
+        data.every((item) => item === null)
+      ) {
+        console.log('dd');
+        return;
       }
+      setsos(data);
     })
-    console.log(data.data);
     
-    if (Array.isArray(data.data) && data.data.every((item) => item === null)) {
-      console.log('dd');
-      return;
-    }
-    setsos(data.data)
+    
   }
   useEffect(() => {
     getsos()

@@ -4,8 +4,8 @@ import Cookies from 'js-cookie';
 class SocketClient {
   private static instance: SocketClient;
   public socket: Socket;
-  public token = Cookies.get('user')
-  
+  public token = Cookies.get('user');
+
   private constructor() {
     this.socket = io('http://localhost:3200', {
       query: {
@@ -24,16 +24,15 @@ class SocketClient {
   connect(): void {
     this.socket.on('connect', () => {
       console.log('Connected to Socket.IO server');
-      console.log(this.socket.id)
+      console.log(this.socket.id);
     });
   }
 
-   subscribeTo(event: string, callback: (data: any) => void): void {
-  this.socket.on(event, data => {
-    callback(data);
-  });
-}
-
+  subscribeTo(event: string, callback: (data: any) => void): void {
+    this.socket.on(event, (data) => {
+      callback(data);
+    });
+  }
 }
 
 export default SocketClient.getInstance();
