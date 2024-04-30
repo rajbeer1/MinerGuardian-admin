@@ -4,10 +4,10 @@ import Cookies from 'js-cookie';
 class SocketClient {
   private static instance: SocketClient;
   public socket: Socket;
-  public token = Cookies.get('user');
+  public token = Cookies.get('admin');
 
   private constructor() {
-    this.socket = io('http://localhost:3200', {
+    this.socket = io('http://localhost:3500', {
       query: {
         token: this.token,
       },

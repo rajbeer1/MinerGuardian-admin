@@ -1,9 +1,42 @@
-import axiosClient from "@/helpers/axios";
-import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
-
-export const SosInfoBox = ({ sosData }) => {
-  const router = useRouter()
+import axiosClient from '@/helpers/axios';
+import { Button } from './ui/button';
+import { useRouter } from 'next/navigation';
+import useSosData from './sosSocket';
+import Cookies from 'js-cookie';
+import { useState } from 'react';
+import Loader from './loader';
+import { Spinner } from './spinner';
+export const SosInfoBox = () => {
+  const { sosData, setSos } = useSosData();
+  const [load,setload]= useState(false)
+  const getdata = async () => {
+    try {
+       setload(true)
+      const data = await axiosClient.get('/sos', {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('admin')}`,
+        },
+      });
+      setSos(data.data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setload(false)
+    }
+  };
+  console.log(sosData);
+   if (sosData[0]?.lastLat === 0) {
+     return (
+       <div className="flex flex-col justify-center items-center">
+         <h1 className="text-2xl font-bold mb-4">No SOS Data</h1>
+         <Button onClick={getdata} disabled={load}>
+           {load ? <Spinner/>: 'Refresh'}
+         </Button>
+       </div>
+     );
+   }
+  const router = useRouter();
   // Inline CSS for styling the boxes and highlighting the email
   const boxStyle = {
     border: '1px solid #ccc',
@@ -30,7 +63,7 @@ export const SosInfoBox = ({ sosData }) => {
 
   return (
     <div style={containerStyle}>
-      {sosData.map((data, index) => (
+      {sosData.map((data:any, index:any) => (
         <div key={index} style={boxStyle}>
           <div style={emailStyle}>{data.email}</div>
           <div>Last Latitude: {data.lastLat}</div>
@@ -38,13 +71,18 @@ export const SosInfoBox = ({ sosData }) => {
           <div>Time: {new Date(data.time).toLocaleString()}</div>
           <div>Temperature: {data.temperature}°C</div>
           <div>Altitude: {data.altitude} meters</div>
-          <Button className="mt-2" onClick={async() => {
-            const req = await axiosClient.post('/sos/update', {
-              "email": data.email,
-              "time":data.time
-            })
-            router.push('/')
-          }}>Resolve</Button>
+          <Button
+            className="mt-2"
+            onClick={async () => {
+              const req = await axiosClient.post('/sos/update', {
+                email: data.email,
+                time: data.time,
+              });
+              router.push('/');
+            }}
+          >
+            Resolve
+          </Button>
         </div>
       ))}
     </div>

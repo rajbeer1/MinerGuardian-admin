@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
   const isProtectedPath = protectedPaths.includes(path);
 
   // Extract Bearer token from Authorization header
-  const token = request.cookies.get('user')?.value || '';
+  const token = request.cookies.get('admin')?.value || '';
 
   // Redirect logic
   if (isPublicPath && token) {

@@ -4,7 +4,7 @@ export const fetchsensordata = async(type:string,limit:number) =>
 {
   const data = await axiosClient.get(`/data/${type}?limit=${limit}`, {
     headers: {
-      Authorization : `Bearer ${Cookies.get('user')}`
+      Authorization : `Bearer ${Cookies.get('admin')}`
     }
   })
 return data

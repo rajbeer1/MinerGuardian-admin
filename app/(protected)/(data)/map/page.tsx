@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import toast, { Toaster } from 'react-hot-toast';
-import LoadingRings from '@/components/loader';
+import Loader from '@/components/loader';
 import { jwtDecode } from '@/helpers/jwt';
 
 function Home() {
@@ -27,7 +27,7 @@ function Home() {
   const getdata = async () => {
     try {
       setisloading(true);
-      const token = Cookies.get('user');
+      const token = Cookies.get('admin');
       const payload = jwtDecode();
       setuseremail(payload?.email!);
       const data = await axiosClient.get('/data/cords/', {
@@ -39,6 +39,9 @@ function Home() {
       setisloading(false);
     } catch (error) {
       toast.error('error loading the map');
+      setisloading(false);
+    } finally {
+      setisloading(false);
     }
   };
   useEffect(() => {
@@ -58,9 +61,10 @@ function Home() {
   }
 
   if (!isLoaded) {
-    return <div>Loading</div>;
+    return <div><Loader/></div>;
   }
-
+  
+  console.log(cordData)
   function calculateCenter(data: any) {
     let sumLat = 0;
     let sumLng = 0;
@@ -82,9 +86,30 @@ function Home() {
   if (isloading)
     return (
       <>
-        <LoadingRings />
+        <Loader/>
       </>
     );
+  if (cordData.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold mb-4">Insufficient Proper Data</h2>
+          <p className="text-gray-600 mb-6">
+            The data for your specific device is insufficient. Please ensure
+            that your hardware device is turned on and try again later.
+          </p>
+          <button
+            className="bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition-colors duration-300"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Refresh Data
+          </button>
+        </div>
+      </div>
+    );
+  }
   return (
     <main
       style={{

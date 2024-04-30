@@ -46,17 +46,20 @@ export default function LoginAccount() {
       console.log(user)
       toast.success('successfully logged in');
       if (remember === 0) {
-        setCookie('user', user.data.token, 0.1);
+        setCookie('admin', user.data.token, 0.1);
 
       } else {
-        setCookie('user', user.data.token, 2);
+        setCookie('admin', user.data.token, 2);
       }
 
       router.push('/home');
       setisloading(true);
     } catch (error: any) {
-      const erro = error?.response.data.message || 'error'
+
+      const erro = error.response.data.message || error?.message || 'error';
       toast.error(erro);
+      setisloading(false);
+    } finally {
       setisloading(false);
     }
   };

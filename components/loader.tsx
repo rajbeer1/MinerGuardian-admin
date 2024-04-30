@@ -1,22 +1,11 @@
 import React from 'react';
 
-const LoadingRings = () => {
+const Loader = () => {
   return (
-    <div className="flex justify-center items-center">
-      <div className="animate-spin">
-        <div className="ring bg-white border-8 border-gray-200"></div>
-      </div>
-      <div className="animate-spin delay-100">
-        <div className="ring bg-gray-200 border-8 border-gray-400"></div>
-      </div>
-      <div className="animate-spin delay-200">
-        <div className="ring bg-gray-400 border-8 border-gray-600"></div>
-      </div>
-      <div className="animate-spin delay-300">
-        <div className="ring bg-gray-600 border-8 border-gray-800"></div>
-      </div>
+    <div className="flex items-center justify-center h-screen">
+      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
     </div>
   );
 };
 
-export default LoadingRings;
+export default Loader;

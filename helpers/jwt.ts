@@ -5,7 +5,7 @@ interface data{
   email: string
 }
 export const jwtDecode = () => {
-  const token = Cookies.get('user');
+  const token = Cookies.get('admin');
   if (token) {
     const data = jwt.decode(token) as data; 
     
