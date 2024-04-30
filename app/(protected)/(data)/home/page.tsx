@@ -34,7 +34,7 @@ const AdminDashboard = () => {
     <div className="flex justify-center bg-slate-900 min-h-screen">
       <div className="w-full p-4">
         <MinersView miners={miners} />
-        fff
+
       </div>
     </div>
   );

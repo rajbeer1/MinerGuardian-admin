@@ -28,7 +28,7 @@ export const SosInfoBox = () => {
   console.log(sosData);
    if (sosData[0]?.lastLat === 0) {
      return (
-       <div className="flex flex-col justify-center items-center">
+       <div className="flex flex-col justify-center items-center ">
          <h1 className="text-2xl font-bold mb-4">No SOS Data</h1>
          <Button onClick={getdata} disabled={load}>
            {load ? <Spinner/>: 'Refresh'}
@@ -38,12 +38,12 @@ export const SosInfoBox = () => {
    }
   const router = useRouter();
   // Inline CSS for styling the boxes and highlighting the email
-  const boxStyle = {
+  const boxStyle: React.CSSProperties = {
     border: '1px solid #ccc',
     borderRadius: '8px',
     padding: '10px',
     margin: '10px auto', // Adjusted to center the boxes
-    backgroundColor: '#f9f9f9',
+  
     width: '90%', // Adjust this value as needed
     maxWidth: '600px', // Optional: set a max-width for larger screens
     boxSizing: 'border-box', // Ensures padding is included in width calculation
@@ -54,7 +54,7 @@ export const SosInfoBox = () => {
     fontWeight: 'bold',
   };
 
-  const containerStyle = {
+  const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -62,9 +62,12 @@ export const SosInfoBox = () => {
   };
 
   return (
-    <div style={containerStyle}>
-      {sosData.map((data:any, index:any) => (
-        <div key={index} style={boxStyle}>
+    <div
+      style={containerStyle}
+      className="bg-gradient-to-r from-purple-200 to-indigo-200"
+    >
+      {sosData.map((data: any, index: any) => (
+        <div key={index} style={boxStyle} className='bg-slate-200 '>
           <div style={emailStyle}>{data.email}</div>
           <div>Last Latitude: {data.lastLat}</div>
           <div>Last Longitude: {data.lastLong}</div>
@@ -72,7 +75,7 @@ export const SosInfoBox = () => {
           <div>Temperature: {data.temperature}°C</div>
           <div>Altitude: {data.altitude} meters</div>
           <Button
-            className="mt-2"
+            className="mt-2 hover:bg-gradient-to-r from-purple-100 to-indigo-100 flex justify-center"
             onClick={async () => {
               const req = await axiosClient.post('/sos/update', {
                 email: data.email,

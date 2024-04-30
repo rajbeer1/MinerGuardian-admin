@@ -85,17 +85,15 @@ const Navbar = () => {
               SOS
             </div>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="sm:max-w-md bg-gradient-to-r from-purple-200 to-indigo-200 ">
             <DialogHeader>
-              <DialogTitle>SOS</DialogTitle>
-              <DialogDescription className="font-semibold">
-                <ScrollArea className="h-[400px] w-[400px] rounded-md border p-4 overflow-auto">
+              <DialogTitle className="flex justify-center">SOS</DialogTitle>
+              <DialogDescription className="font-semibold ">
+                <ScrollArea className="h-[400px] w-[400px] rounded-md border  overflow-auto">
                   <SosInfoBox />
                 </ScrollArea>
               </DialogDescription>
             </DialogHeader>
-
-            
           </DialogContent>
         </Dialog>
         <Dialog>
@@ -109,11 +107,12 @@ const Navbar = () => {
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle className='py-4 flex justify-center font-semibold text-3xl'>Invite</DialogTitle>
+              <DialogTitle className="py-4 flex justify-center font-semibold text-3xl">
+                Invite
+              </DialogTitle>
               <DialogDescription className="font-semibold">
                 <div className="flex flex-col space-y-4">
                   <div>
-                    
                     <input
                       type="email"
                       id="email"
@@ -126,7 +125,6 @@ const Navbar = () => {
                   </div>
                   <Button
                     type="button"
-                    
                     onClick={async () => {
                       try {
                         const response = await axiosClient.post(
@@ -142,13 +140,11 @@ const Navbar = () => {
                         );
 
                         console.log(response.data);
-                       
-                          toast.success('invite has been sent ');
 
-                      
+                        toast.success('invite has been sent ');
                       } catch (error) {
                         console.error('Error:', error);
-                        toast.error('error in sending the invite')
+                        toast.error('error in sending the invite');
                       }
                     }}
                   >
@@ -157,7 +153,6 @@ const Navbar = () => {
                 </div>
               </DialogDescription>
             </DialogHeader>
-            
           </DialogContent>
         </Dialog>
         <Dialog>

@@ -14,11 +14,11 @@ const MinersView = ({ miners }: any) => {
       {miners.map((miner: any, index: number) => (
         <div
           key={index}
-          className="bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg shadow-md p-6 flex flex-col justify-between text-white"
+          className="bg-gradient-to-r from-purple-400 to-indigo-400 rounded-lg shadow-md p-6 flex flex-col justify-between text-white"
         >
           <div>
-            <h3 className="text-lg font-semibold mb-2">{miner.name}</h3>
-            <ul className="text-gray-200">
+            <h3 className="text-lg font-semibold mb-2 flex justify-center">{miner.name}</h3>
+            <ul className="text-stone-900">
               <li className="flex items-center mb-2">
                 <IoMailOutline className="mr-2" />
                 <span className="font-semibold">Email:</span> {miner.email}
@@ -46,16 +46,11 @@ const MinersView = ({ miners }: any) => {
             </ul>
           </div>
           <div className="flex justify-between items-center mt-4">
-            <div className="flex items-center">
-              <IoCalendarOutline className="mr-2" />
-              <span className="text-sm text-gray-300">
-                Created: {new Date(miner.createdAt).toLocaleDateString()}
-              </span>
-            </div>
+            
             <div className="flex items-center">
               <IoTimeOutline className="mr-2" />
               <span className="text-sm text-gray-300">
-                Updated: {new Date(miner.updatedAt).toLocaleString()}
+                Time: {new Date(miner.updatedAt).toLocaleString()}
               </span>
             </div>
           </div>
