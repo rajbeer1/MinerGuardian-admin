@@ -4,7 +4,6 @@ import {
   IoWaterOutline,
   IoLocationOutline,
   IoMailOutline,
-  IoCalendarOutline,
   IoTimeOutline,
 } from 'react-icons/io5';
 
