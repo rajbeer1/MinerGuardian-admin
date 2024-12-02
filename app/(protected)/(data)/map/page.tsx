@@ -111,17 +111,10 @@ function Home() {
     );
   }
   return (
-    <main
-      style={{
-        position: 'relative',
-        width: '100%',
-        height: `calc(100vh - 60px)`,
-      }}
-    >
+    <main className="relative w-full h-[calc(100vh-64px)]">
       {' '}
       <GoogleMap
         mapContainerStyle={{
-          position: 'relative',
           height: '100%',
           width: '100%',
         }}

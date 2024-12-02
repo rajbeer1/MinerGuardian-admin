@@ -31,10 +31,9 @@ const AdminDashboard = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex justify-center bg-slate-900 min-h-screen">
-      <div className="w-full p-4">
+    <div className="flex justify-center bg-slate-900 min-h-screen p-4">
+      <div className="w-full max-w-7xl">
         <MinersView miners={miners} />
-
       </div>
     </div>
   );

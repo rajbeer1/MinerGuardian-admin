@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
-  baseURL: 'https://sih-backend-v3m4.onrender.com',
+  baseURL: 'http://localhost:3500',
 });
 
 export default axiosClient;

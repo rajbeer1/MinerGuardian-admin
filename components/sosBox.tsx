@@ -38,16 +38,14 @@ export const SosInfoBox = () => {
    }
   const router = useRouter();
   // Inline CSS for styling the boxes and highlighting the email
-  const boxStyle: React.CSSProperties = {
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    padding: '10px',
-    margin: '10px auto', // Adjusted to center the boxes
-  
-    width: '90%', // Adjust this value as needed
-    maxWidth: '600px', // Optional: set a max-width for larger screens
-    boxSizing: 'border-box', // Ensures padding is included in width calculation
-  };
+ const boxStyle: React.CSSProperties = {
+   border: '1px solid #ccc',
+   borderRadius: '8px',
+   padding: '10px',
+   margin: '10px 0',
+   width: '100%',
+   boxSizing: 'border-box',
+ };
 
   const emailStyle = {
     color: '#007bff',

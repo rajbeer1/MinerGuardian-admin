@@ -67,15 +67,15 @@ const erro = error.response.data.message || error?.message || 'error';
   console.log(data);
 
   return (
-    <div className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden">
-      <div className="w-full m-auto bg-white lg:max-w-lg">
+    <div className="flex justify-center items-center min-h-screen p-4 bg-gray-100">
+      <div className="w-full max-w-md">
         <Toaster
           position="top-right"
           toastOptions={{
             duration: 5000,
           }}
         ></Toaster>
-        <Card>
+        <Card className='w-full'>
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl text-center">Sign up</CardTitle>
             <CardDescription className="text-center font-bold text-black">
@@ -118,7 +118,7 @@ const erro = error.response.data.message || error?.message || 'error';
                 }}
               />
             </div>
-           
+
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="terms"
