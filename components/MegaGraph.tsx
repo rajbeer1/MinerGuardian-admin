@@ -28,7 +28,6 @@ const parameters = [
 
 const UserInputChart = ({ email }: any) => {
   const [data, setData] = useState([]);
-  const chartRef = useRef(null);
   const [timeframe, setTimeframe] = useState('all');
   const [selectedParameters, setSelectedParameters] = useState(['temperature']);
   const [isLoading, setIsLoading] = useState(false);
@@ -171,8 +170,8 @@ const UserInputChart = ({ email }: any) => {
 
   const normalizeValue = (value: any, param: any, data: any) => {
     const values = data
-      .map((item) => item[param])
-      .filter((v) => v !== undefined);
+      .map((item: any) => item[param])
+      .filter((v: any) => v !== undefined);
     const min = Math.min(...values);
     const max = Math.max(...values);
     return max === min ? 50 : ((value - min) / (max - min)) * 100;
@@ -184,21 +183,21 @@ const UserInputChart = ({ email }: any) => {
       const clusterSize = Math.ceil(rawData.length / MAX_DATA_POINTS);
       for (let i = 0; i < rawData.length; i += clusterSize) {
         const cluster = rawData.slice(i, i + clusterSize);
-        const dataPoint = {
+        const dataPoint: { createdAt: any; [key: string]: any } = {
           createdAt: cluster[Math.floor(cluster.length / 2)].createdAt,
         };
         selectedParameters.forEach((param) => {
           const avgValue =
-            cluster.reduce((sum, point) => sum + point[param], 0) /
+            cluster.reduce((sum: any, point: any) => sum + point[param], 0) /
             cluster.length;
           dataPoint[param] = Number(avgValue.toFixed(2));
         });
         processedData.push(dataPoint);
       }
     }
-    return processedData.map((point) => {
+    return processedData.map((point: any) => {
       const enhancedPoint = { ...point };
-      selectedParameters.forEach((param) => {
+      selectedParameters.forEach((param: any) => {
         enhancedPoint[`${param}Normalized`] = normalizeValue(
           point[param],
           param,
@@ -359,7 +358,7 @@ const UserInputChart = ({ email }: any) => {
                   }}
                   labelFormatter={(label) => new Date(label).toLocaleString()}
                   formatter={(value, name, props) => {
-                    const originalName = name.replace('Normalized', '');
+                    const originalName = String(name).replace('Normalized', '');
                     const originalValue = props.payload[originalName];
                     return [
                       originalValue,
