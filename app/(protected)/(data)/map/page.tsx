@@ -12,6 +12,8 @@ import Cookies from 'js-cookie';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '@/components/loader';
 import { jwtDecode } from '@/helpers/jwt';
+import Link from 'next/link';
+import { IoArrowForwardOutline } from 'react-icons/io5';
 
 function Home() {
   const libraries: Libraries = ['visualization'] as const;
@@ -140,6 +142,12 @@ function Home() {
                   <h2>{data.email}</h2>
                   <p>Latitude: {data.latitude}</p>
                   <p>Longitude: {data.longitude}</p>
+                  <Link href={`/graph/${data.email}`}>
+                    <span className=" text-md font-bold flex items-center gap-2 mt-1 cursor-pointer">
+                      Reports
+                      <IoArrowForwardOutline className="mr-2" />
+                    </span>
+                  </Link>
                 </div>
               </InfoWindow>
             ) : null}

@@ -5,7 +5,9 @@ import {
   IoLocationOutline,
   IoMailOutline,
   IoTimeOutline,
+  IoArrowForwardOutline,
 } from 'react-icons/io5';
+import Link from 'next/link';
 
 const MinersView = ({ miners }: any) => {
   return (
@@ -53,6 +55,12 @@ const MinersView = ({ miners }: any) => {
                 Time: {new Date(miner.updatedAt).toLocaleString()}
               </span>
             </div>
+            <Link href={`/graph/${miner.email}`}>
+              <span className="text-sm text-gray-300 flex items-center gap-2">
+                Reports
+                <IoArrowForwardOutline className="mr-2" />
+              </span>
+            </Link>
           </div>
         </div>
       ))}
