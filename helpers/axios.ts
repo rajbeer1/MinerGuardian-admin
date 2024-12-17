@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
-  baseURL: 'https://rajbeer.tech',
+  baseURL: 'https://api.rajbeer.tech',
 });
 
 export default axiosClient;
