@@ -3,12 +3,13 @@ import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import useSosData from './sosSocket';
 import Cookies from 'js-cookie';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Loader from './loader';
 import { Spinner } from './spinner';
 export const SosInfoBox = () => {
   const { sosData, setSos } = useSosData();
   const [load,setload]= useState(false)
+
   const getdata = async () => {
     try {
        setload(true)
@@ -25,7 +26,13 @@ export const SosInfoBox = () => {
       setload(false)
     }
   };
-  console.log(sosData);
+
+  useEffect(() => {
+    getdata();
+    const interval = setInterval(getdata, 10000);
+    return () => clearInterval(interval);
+  }, []); 
+
    if (sosData[0]?.lastLat === 0) {
      return (
        <div className="flex flex-col justify-center items-center ">
